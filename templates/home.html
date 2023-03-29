@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+    <title>Teaching Assistant Application</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script src="/static/js/jquery.ui.widget.js"></script>
+
+    <script type="text/javascript" src="/static/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.fileupload-process.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.fileupload-ui.js"></script>
+
+    <script>
+      $(function(){
+            $('#fileupload').fileupload({
+                url: 'upload',
+                dataType: 'json',
+                add: function (e, data) {
+                  data.submit();
+                },
+                success:function(response,status) {
+                  console.log(response.filename);
+                  var filePath = 'static/Uploads/' + response.filename;
+                  $('#imgUpload').attr('src',filePath);
+                  $('#filePath').val(filePath);
+                  console.log('success');
+                },
+                error:function(error){
+                        console.log(error);
+                }
+            });
+      })
+    </script>
+
+    <style>
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+    </style>
+
+</head>
+<div class="header">
+  <nav>
+    <ul class="nav nav-pills pull-right">
+      <li role="presentation" class="active"><a href="/add_ta_data">Add Data</a></li>
+      <li role="presentation" ><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+</div>
+<h1>Teaching Assistant Application</h1>
+{% for x in ta_data_html%}
+<div class="card-body" style="width: 100rem;">
+    <h3 class="card-title">{{x.course}}</h3>
+    <h6 class="card-title"><strong>Instructor Name:</strong>{{x.Course_instructor}}</h6>
+    {% if x.native_english_speaker == True %}
+      <h6 class="card-title"><strong>Native_english_speaker:</strong>Yes</h6>
+    {% else %}
+      <h6 class="card-title"><strong>Native_english_speaker:</strong>No</h6>
+    {% endif %}
+    <h6 class="card-title"><strong>Semester:</strong>{{x.semester}}</h6>
+    <h6 class="card-title"><strong>Class_size:</strong>{{x.class_size}}</h6>
+    <h6 class="card-title"><strong>Class_attribute:</strong>{{x.class_attribute}}</h6>
+    <div class="form-group">
+        <a href="/fetch_data/{{ x.id }}">View Data</a>
+    </div>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Teaching Assistant Application</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+
+    <style>
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        {% for key, value in result.items() %}
+        <div class="header">
+          <nav>
+            <ul class="nav nav-pills pull-right">
+              <li role="presentation"><a href="/user/{{ value }}">Home</a></li>
+              <li role="presentation" ><a href="/logout">Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+        {% endfor %}
+
+        <form role="form" method="post" action="/add_ta_data">
+
+            <!-- Form Name -->
+            <legend>Enter Your TA Data</legend>
+
+            <!--Course_instructor input -->
+            <div class="form-group">
+                <label for="txtTitle">Course_instructor</label>
+
+                <input id="txtTitle" name="Course_instructor" type="text" placeholder="placeholder" class="form-control input-md">
+
+            </div>
+
+             <!--course input -->
+             <div class="form-group">
+                <label for="txtTitle">course</label>
+
+                <input id="txtTitle" name="course" type="text" placeholder="placeholder" class="form-control input-md">
+
+            </div>
+
+            <!--class_size input -->
+            <div class="form-group">
+                <label for="txtTitle">class_size</label>
+
+                <input id="txtTitle" name="class_size" type="number" placeholder="placeholder" class="form-control input-md">
+
+            </div>
+
+            
+           <!-- input for class_attribute -->
+           <div class="form-group">
+            <h3 class="card-title">Choose Attribute</h3>
+            <input type="checkbox" id="class_attribute" name="class_attribute" value="Low">
+            <label>Mark this for Low.</label>
+            <input type="checkbox" id="class_attribute" name="class_attribute" value="Medium">
+            <label>Mark this for Medium.</label>
+            <input type="checkbox" id="class_attribute" name="class_attribute" value="High">
+            <label>Mark this for High.</label>
+           </div>
+
+           <!-- input for semester -->
+           <div class="form-group">
+            <h3 class="card-title">Choose Semester</h3>
+            <input type="checkbox" id="semester" name="semester" value="Summer">
+            <label>summer.</label>
+            <input type="checkbox" id="semester" name="semester" value="Regular">
+            <label>regular.</label>
+           </div>
+
+           <!-- input for native english speaker -->
+            <div class="form-group">
+                <input type="checkbox" id="native_english_speaker" name="native_english_speaker" value=true>
+                <label>Mark this for native_english_speaker.</label>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+
+                <p class="text-center">
+                    <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" >
+                </p>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>
